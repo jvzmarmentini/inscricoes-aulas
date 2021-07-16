@@ -1,11 +1,14 @@
-package pucrs.jvzmarmentini.registration;
+package pucrs.jvzmarmentini.registration.business.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+import pucrs.jvzmarmentini.registration.business.entities.Student;
+import pucrs.jvzmarmentini.registration.business.repositories.IStudentRepository;
+
+@Service
 public class StudentService {
 
     private final IStudentRepository studRepo;

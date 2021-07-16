@@ -6,6 +6,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import pucrs.jvzmarmentini.registration.business.entities.Meeting;
+import pucrs.jvzmarmentini.registration.business.entities.Student;
+import pucrs.jvzmarmentini.registration.business.repositories.IMeetingRepository;
+import pucrs.jvzmarmentini.registration.business.repositories.IStudentRepository;
+
 @Configuration
 public class LoadDatabase {
 

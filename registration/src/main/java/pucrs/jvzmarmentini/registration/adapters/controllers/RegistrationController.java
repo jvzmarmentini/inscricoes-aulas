@@ -1,4 +1,4 @@
-package pucrs.jvzmarmentini.registration;
+package pucrs.jvzmarmentini.registration.adapters.controllers;
 
 import java.util.List;
 
@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import pucrs.jvzmarmentini.registration.business.entities.Meeting;
+import pucrs.jvzmarmentini.registration.business.entities.Student;
+import pucrs.jvzmarmentini.registration.business.repositories.IMeetingRepository;
+import pucrs.jvzmarmentini.registration.business.repositories.IStudentRepository;
 
 @RestController
 @RequestMapping("/registration")
@@ -42,13 +47,13 @@ public class RegistrationController {
 
     @GetMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
-    public Student one(@PathVariable Integer reg) {
+    public Student oneById(@PathVariable Integer reg) {
         return studRepo.oneById(reg);
     }
 
     @GetMapping("/students/{name}")
     @CrossOrigin(origins = "*")
-    public Student one(@PathVariable String name) {
+    public Student oneByName(@PathVariable String name) {
         return studRepo.oneByName(name);
     }
 

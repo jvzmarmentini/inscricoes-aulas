@@ -1,4 +1,4 @@
-package pucrs.jvzmarmentini.registration;
+package pucrs.jvzmarmentini.registration.business.entities;
 
 import java.util.Objects;
 
