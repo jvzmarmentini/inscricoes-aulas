@@ -19,10 +19,10 @@ public class ServiceMeeting {
     }
 
     public Meeting newMeeting(Meeting newMeeting) {
-        return meetRepo.save(newMeeting);
+        return meetRepo.newMeeting(newMeeting);
     }
 
     public List<Meeting> allMeetings() {
-        return meetRepo.findAll();
+        return meetRepo.allMeetings();
     }
 }

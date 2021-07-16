@@ -23,10 +23,10 @@ public class QueryStudentUC {
     }
 
     public Student run(Integer reg) {
-        return servStud.oneById(reg);
+        return servStud.allStudents(reg);
     }
 
     public Student run(String name) {
-        return servStud.oneByName(name);
+        return servStud.allStudents(name);
     }
 }

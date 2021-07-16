@@ -19,39 +19,28 @@ public class ServiceStudent {
     }
 
     public List<Student> allStudents() {
-        return studRepo.findAll();
+        return studRepo.allStudents();
     }
 
-    public Student newStudent(Student newStudent) {
-        return studRepo.save(newStudent);
+    public Student allStudents(Integer reg) {
+        return studRepo.allStudents(reg);
+        // .orElseThrow(() -> new StudentNotFoundException(reg));
     }
 
-    public Student oneById(Integer reg) {
-        return studRepo.findById(reg).orElseThrow(() -> new StudentNotFoundException(reg));
-    }
-
-    public Student oneByName(String name) {
+    public Student allStudents(String name) {
         // TODO
         return null;
     }
 
+    public Student newStudent(Student newStudent) {
+        return studRepo.newStudent(newStudent);
+    }
+
     public Student replaceStudent(Student newStudent, Integer reg) {
-        return studRepo.findById(reg).map(student -> {
-            student.setReg(newStudent.getReg());
-            student.setName(newStudent.getName());
-            return studRepo.save(student);
-        }).orElseGet(() -> {
-            newStudent.setReg(reg);
-            return studRepo.save(newStudent);
-        });
+        return replaceStudent(newStudent, reg);
     }
 
     public boolean deleteStudent(Integer reg) {
-        try {
-            studRepo.deleteById(reg);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+        return deleteStudent(reg);
     }
 }
