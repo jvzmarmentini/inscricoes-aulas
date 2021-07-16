@@ -1,0 +1,21 @@
+package pucrs.jvzmarmentini.registration;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class LoadDatabase {
+
+    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+
+    @Bean
+    CommandLineRunner initDatabase(StudentRepository studRepo) {
+        return args -> {
+            log.info("Preloading " + studRepo.save(new Student("Bilbo Baggins")));
+            log.info("Preloading " + studRepo.save(new Student("Frodo Baggins")));
+        };
+    }
+}

@@ -17,46 +17,46 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    private final StudentRepository stdRepo;
+    private final StudentRepository studRepo;
 
     @Autowired
-    public RegistrationController(StudentRepository stdRepo) {
-        this.stdRepo = stdRepo;
+    public RegistrationController(StudentRepository studRepo) {
+        this.studRepo = studRepo;
     }
 
     @GetMapping("/students")
     @CrossOrigin(origins = "*")
     public List<Student> all() {
-        return stdRepo.findAll();
+        return studRepo.findAll();
     }
 
     @PostMapping("/students")
     @CrossOrigin(origins = "*")
     public Student newStudent(@RequestBody Student newStudent) {
-        return stdRepo.save(newStudent);
+        return studRepo.save(newStudent);
     }
 
     @GetMapping("/students/{id}")
     @CrossOrigin(origins = "*")
     public Student one(@PathVariable String name) {
-        return stdRepo.findById(name).orElseThrow(() -> new StudentNotFoundException(name));
+        return studRepo.findById(name).orElseThrow(() -> new StudentNotFoundException(name));
     }
 
     @PutMapping("/students/{id}")
     @CrossOrigin(origins = "*")
     public Student replaceStudent(@RequestBody Student newStudent, @PathVariable String name) {
-        return stdRepo.findById(name).map(student -> {
+        return studRepo.findById(name).map(student -> {
             student.setName(newStudent.getName());
-            return stdRepo.save(student);
+            return studRepo.save(student);
         }).orElseGet(() -> {
             newStudent.setName(name);
-            return stdRepo.save(newStudent);
+            return studRepo.save(newStudent);
         });
     }
 
     @DeleteMapping("/students/{id}")
     @CrossOrigin(origins = "*")
     public void deleteStudent(@PathVariable String name) {
-        stdRepo.deleteById(name);
+        studRepo.deleteById(name);
     }
 }
