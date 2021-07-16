@@ -17,68 +17,67 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    private final StudentRepository studRepo;
-    private final MeetingRepository meetRepo;
+    private final IStudentRepository studRepo;
+    private final IMeetingRepository meetRepo;
 
     @Autowired
-    public RegistrationController(StudentRepository studRepo, MeetingRepository meetRepo) {
+    public RegistrationController(IStudentRepository studRepo, IMeetingRepository meetRepo) {
         this.studRepo = studRepo;
         this.meetRepo = meetRepo;
     }
 
+    // Students end points
+
     @GetMapping("/students")
     @CrossOrigin(origins = "*")
     public List<Student> allStudents() {
-        return studRepo.findAll();
-    }
-
-    @GetMapping("/meetings")
-    @CrossOrigin(origins = "*")
-    public List<Meeting> allMeetings() {
-        return meetRepo.findAll();
+        return studRepo.allStudents();
     }
 
     @PostMapping("/students")
     @CrossOrigin(origins = "*")
     public Student newStudent(@RequestBody Student newStudent) {
-        return studRepo.save(newStudent);
-    }
-
-    @PostMapping("/meetings")
-    @CrossOrigin(origins = "*")
-    public Meeting newMeeting(@RequestBody Meeting newMeeting) {
-        return meetRepo.save(newMeeting);
+        return studRepo.newStudent(newStudent);
     }
 
     @GetMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
     public Student one(@PathVariable Integer reg) {
-        return studRepo.findById(reg).orElseThrow(() -> new StudentNotFoundException(reg));
+        return studRepo.oneById(reg);
     }
 
     @GetMapping("/students/{name}")
     @CrossOrigin(origins = "*")
     public Student one(@PathVariable String name) {
-        return studRepo.findByName(name);
+        return studRepo.oneByName(name);
     }
 
     @PutMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
     public Student replaceStudent(@RequestBody Student newStudent, @PathVariable Integer reg) {
-        return studRepo.findById(reg).map(student -> {
-            student.setReg(newStudent.getReg());
-            student.setName(newStudent.getName());
-            return studRepo.save(student);
-        }).orElseGet(() -> {
-            newStudent.setReg(reg);
-            return studRepo.save(newStudent);
-        });
+        return studRepo.replaceStudent(newStudent, reg);
     }
 
     @DeleteMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
-    public void deleteStudent(@PathVariable Integer reg) {
-        System.out.println(reg);
-        studRepo.deleteById(reg);
+    public boolean deleteStudent(@PathVariable Integer reg) {
+        return studRepo.deleteStudent(reg);
     }
+
+    // Meetings end points
+
+    @PostMapping("/meetings")
+    @CrossOrigin(origins = "*")
+    public Meeting newMeeting(@RequestBody Meeting newMeeting) {
+        return meetRepo.newMeeting(newMeeting);
+    }
+
+    @GetMapping("/meetings")
+    @CrossOrigin(origins = "*")
+    public List<Meeting> allMeetings() {
+        return meetRepo.allMeetings();
+    }
+
+    // Subscribers end points
+
 }
