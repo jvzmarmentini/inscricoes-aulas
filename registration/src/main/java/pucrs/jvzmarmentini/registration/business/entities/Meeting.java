@@ -5,8 +5,11 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.ManyToMany;
 
-@Entity
+import java.util.List;
+
+@Entity(name = "Meeting")
 @IdClass(MeetingID.class)
 public class Meeting {
 
@@ -14,6 +17,9 @@ public class Meeting {
     private @Id Integer classNum;
     private int day;
     private int month;
+
+    @ManyToMany(mappedBy = "registeredMeetings")
+    List<Student> registereds;
 
     public Meeting() {
     }

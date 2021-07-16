@@ -1,15 +1,23 @@
 package pucrs.jvzmarmentini.registration.business.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
-@Entity
+@Entity(name = "Student")
 public class Student {
 
     private @Id Integer reg;
     private String name;
+
+    @ManyToMany
+    @JoinTable(name = "meeting_registered", joinColumns = @JoinColumn(name = "student_reg"), inverseJoinColumns = @JoinColumn(name = "meeting_id"))
+    List<Meeting> registeredMeetings;
 
     public Student() {
     }
