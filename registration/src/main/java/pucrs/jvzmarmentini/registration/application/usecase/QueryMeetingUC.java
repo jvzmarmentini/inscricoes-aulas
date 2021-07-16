@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.services.ServiceMeeting;
 
+@Component
 public class QueryMeetingUC {
 
     private ServiceMeeting servMeet;
