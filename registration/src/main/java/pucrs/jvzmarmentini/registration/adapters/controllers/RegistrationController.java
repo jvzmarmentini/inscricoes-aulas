@@ -13,22 +13,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pucrs.jvzmarmentini.registration.application.usecase.QueryStudentUC;
+import pucrs.jvzmarmentini.registration.application.usecase.RegisterStudentUC;
+import pucrs.jvzmarmentini.registration.application.usecase.UpdateStudentUC;
+import pucrs.jvzmarmentini.registration.application.usecase.DeleteStudentUC;
+import pucrs.jvzmarmentini.registration.application.usecase.QueryMeetingUC;
+import pucrs.jvzmarmentini.registration.application.usecase.RegisterMeetingUC;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
-import pucrs.jvzmarmentini.registration.business.repositories.IMeetingRepository;
-import pucrs.jvzmarmentini.registration.business.repositories.IStudentRepository;
 
 @RestController
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    private final IStudentRepository studRepo;
-    private final IMeetingRepository meetRepo;
+    private final QueryStudentUC queryStdu;
+    private final RegisterStudentUC regStdu;
+    private final UpdateStudentUC updStdu;
+    private final DeleteStudentUC delStdu;
+    private final QueryMeetingUC queryMeet;
+    private final RegisterMeetingUC regMeet;
 
     @Autowired
-    public RegistrationController(IStudentRepository studRepo, IMeetingRepository meetRepo) {
-        this.studRepo = studRepo;
-        this.meetRepo = meetRepo;
+    public RegistrationController(QueryStudentUC queryStdu, RegisterStudentUC regStdu, UpdateStudentUC updStdu,
+            DeleteStudentUC delStdu, QueryMeetingUC queryMeet, RegisterMeetingUC regMeet) {
+        this.queryStdu = queryStdu;
+        this.regStdu = regStdu;
+        this.updStdu = updStdu;
+        this.delStdu = delStdu;
+        this.queryMeet = queryMeet;
+        this.regMeet = regMeet;
     }
 
     // Students end points
@@ -36,51 +49,51 @@ public class RegistrationController {
     @GetMapping("/students")
     @CrossOrigin(origins = "*")
     public List<Student> allStudents() {
-        return studRepo.allStudents();
-    }
-
-    @PostMapping("/students")
-    @CrossOrigin(origins = "*")
-    public Student newStudent(@RequestBody Student newStudent) {
-        return studRepo.newStudent(newStudent);
+        return queryStdu.run();
     }
 
     @GetMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
     public Student oneById(@PathVariable Integer reg) {
-        return studRepo.oneById(reg);
+        return queryStdu.run(reg);
     }
 
     @GetMapping("/students/{name}")
     @CrossOrigin(origins = "*")
     public Student oneByName(@PathVariable String name) {
-        return studRepo.oneByName(name);
+        return queryStdu.run(name);
+    }
+
+    @PostMapping("/students")
+    @CrossOrigin(origins = "*")
+    public Student newStudent(@RequestBody Student newStudent) {
+        return regStdu.run(newStudent);
     }
 
     @PutMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
     public Student replaceStudent(@RequestBody Student newStudent, @PathVariable Integer reg) {
-        return studRepo.replaceStudent(newStudent, reg);
+        return updStdu.run(newStudent, reg);
     }
 
     @DeleteMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
     public boolean deleteStudent(@PathVariable Integer reg) {
-        return studRepo.deleteStudent(reg);
+        return delStdu.run(reg);
     }
 
     // Meetings end points
 
-    @PostMapping("/meetings")
-    @CrossOrigin(origins = "*")
-    public Meeting newMeeting(@RequestBody Meeting newMeeting) {
-        return meetRepo.newMeeting(newMeeting);
-    }
-
     @GetMapping("/meetings")
     @CrossOrigin(origins = "*")
     public List<Meeting> allMeetings() {
-        return meetRepo.allMeetings();
+        return queryMeet.run();
+    }
+
+    @PostMapping("/meetings")
+    @CrossOrigin(origins = "*")
+    public Meeting newMeeting(@RequestBody Meeting newMeeting) {
+        return regMeet.run(newMeeting);
     }
 
     // Subscribers end points

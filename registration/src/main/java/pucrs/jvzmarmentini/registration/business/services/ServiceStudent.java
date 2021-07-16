@@ -9,12 +9,12 @@ import pucrs.jvzmarmentini.registration.business.entities.Student;
 import pucrs.jvzmarmentini.registration.business.repositories.IStudentRepository;
 
 @Service
-public class StudentService {
+public class ServiceStudent {
 
     private final IStudentRepository studRepo;
 
     @Autowired
-    public StudentService(IStudentRepository studRepo) {
+    public ServiceStudent(IStudentRepository studRepo) {
         this.studRepo = studRepo;
     }
 

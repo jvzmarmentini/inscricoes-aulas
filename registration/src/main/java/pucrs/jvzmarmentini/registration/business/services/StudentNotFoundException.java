@@ -1,7 +1,7 @@
-package pucrs.jvzmarmentini.registration;
+package pucrs.jvzmarmentini.registration.business.services;
 
 public class StudentNotFoundException extends RuntimeException {
-    StudentNotFoundException(Integer reg) {
+    public StudentNotFoundException(Integer reg) {
         super("Could not find student " + reg);
     }
 }

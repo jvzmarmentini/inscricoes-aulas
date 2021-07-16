@@ -9,12 +9,12 @@ import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.repositories.IMeetingRepository;
 
 @Service
-public class MeetingService {
+public class ServiceMeeting {
 
     private final IMeetingRepository meetRepo;
 
     @Autowired
-    public MeetingService(IMeetingRepository meetRepo) {
+    public ServiceMeeting(IMeetingRepository meetRepo) {
         this.meetRepo = meetRepo;
     }
 
