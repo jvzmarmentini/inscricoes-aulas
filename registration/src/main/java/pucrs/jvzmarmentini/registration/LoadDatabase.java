@@ -12,7 +12,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(StudentRepository studRepo) {
+    CommandLineRunner initStudentDatabase(StudentRepository studRepo) {
         return args -> {
             log.info("Preloading " + studRepo.save(new Student(20100001, "Bilbo Baggins")));
             log.info("Preloading " + studRepo.save(new Student(20100002, "Frodo Baggins")));
@@ -20,7 +20,7 @@ public class LoadDatabase {
     }
 
     @Bean
-    CommandLineRunner initDatabase(MeetingRepository meetRepo) {
+    CommandLineRunner initMeetingDatabase(MeetingRepository meetRepo) {
         return args -> {
             log.info("Preloading " + meetRepo.save(new Meeting("98801-04", 30, 20, 8)));
             log.info("Preloading " + meetRepo.save(new Meeting("98H00-04", 30, 21, 8)));

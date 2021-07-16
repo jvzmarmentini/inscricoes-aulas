@@ -15,6 +15,9 @@ public class Meeting {
     private int day;
     private int month;
 
+    public Meeting() {
+    }
+
     public Meeting(String codcred, Integer classNum, int day, int month) {
         this.codcred = codcred;
         this.classNum = classNum;
