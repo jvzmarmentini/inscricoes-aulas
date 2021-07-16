@@ -66,7 +66,7 @@ public class Meeting {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (!(obj instanceof Student))
+        if (!(obj instanceof Meeting))
             return false;
 
         Meeting meeting = (Meeting) obj;
