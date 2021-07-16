@@ -18,22 +18,36 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegistrationController {
 
     private final StudentRepository studRepo;
+    private final MeetingRepository meetRepo;
 
     @Autowired
-    public RegistrationController(StudentRepository studRepo) {
+    public RegistrationController(StudentRepository studRepo, MeetingRepository meetRepo) {
         this.studRepo = studRepo;
+        this.meetRepo = meetRepo;
     }
 
     @GetMapping("/students")
     @CrossOrigin(origins = "*")
-    public List<Student> all() {
+    public List<Student> allStudents() {
         return studRepo.findAll();
+    }
+
+    @GetMapping("/meetings")
+    @CrossOrigin(origins = "*")
+    public List<Meeting> allMeetings() {
+        return meetRepo.findAll();
     }
 
     @PostMapping("/students")
     @CrossOrigin(origins = "*")
     public Student newStudent(@RequestBody Student newStudent) {
         return studRepo.save(newStudent);
+    }
+
+    @PostMapping("/meetings")
+    @CrossOrigin(origins = "*")
+    public Meeting newMeeting(@RequestBody Meeting newMeeting) {
+        return meetRepo.save(newMeeting);
     }
 
     @GetMapping("/students/{reg}")

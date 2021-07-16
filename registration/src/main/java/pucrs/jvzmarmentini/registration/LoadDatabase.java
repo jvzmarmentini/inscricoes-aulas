@@ -18,4 +18,12 @@ public class LoadDatabase {
             log.info("Preloading " + studRepo.save(new Student(20100002, "Frodo Baggins")));
         };
     }
+
+    @Bean
+    CommandLineRunner initDatabase(MeetingRepository meetRepo) {
+        return args -> {
+            log.info("Preloading " + meetRepo.save(new Meeting("98801-04", 30, 20, 8)));
+            log.info("Preloading " + meetRepo.save(new Meeting("98H00-04", 30, 21, 8)));
+        };
+    }
 }
