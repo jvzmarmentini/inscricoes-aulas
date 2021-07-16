@@ -36,27 +36,35 @@ public class RegistrationController {
         return studRepo.save(newStudent);
     }
 
-    @GetMapping("/students/{id}")
+    @GetMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
-    public Student one(@PathVariable String name) {
-        return studRepo.findById(name).orElseThrow(() -> new StudentNotFoundException(name));
+    public Student one(@PathVariable Integer reg) {
+        return studRepo.findById(reg).orElseThrow(() -> new StudentNotFoundException(reg));
     }
 
-    @PutMapping("/students/{id}")
+    @GetMapping("/students/{name}")
     @CrossOrigin(origins = "*")
-    public Student replaceStudent(@RequestBody Student newStudent, @PathVariable String name) {
-        return studRepo.findById(name).map(student -> {
+    public Student one(@PathVariable String name) {
+        return studRepo.findByName(name);
+    }
+
+    @PutMapping("/students/{reg}")
+    @CrossOrigin(origins = "*")
+    public Student replaceStudent(@RequestBody Student newStudent, @PathVariable Integer reg) {
+        return studRepo.findById(reg).map(student -> {
+            student.setReg(newStudent.getReg());
             student.setName(newStudent.getName());
             return studRepo.save(student);
         }).orElseGet(() -> {
-            newStudent.setName(name);
+            newStudent.setReg(reg);
             return studRepo.save(newStudent);
         });
     }
 
-    @DeleteMapping("/students/{id}")
+    @DeleteMapping("/students/{reg}")
     @CrossOrigin(origins = "*")
-    public void deleteStudent(@PathVariable String name) {
-        studRepo.deleteById(name);
+    public void deleteStudent(@PathVariable Integer reg) {
+        System.out.println(reg);
+        studRepo.deleteById(reg);
     }
 }

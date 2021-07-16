@@ -8,13 +8,23 @@ import javax.persistence.Id;
 @Entity
 public class Student {
 
-    private @Id String name;
+    private @Id Integer reg;
+    private String name;
 
     public Student() {
     }
 
-    public Student(String name) {
+    public Student(Integer reg, String name) {
+        this.reg = reg;
         this.name = name;
+    }
+
+    public Integer getReg() {
+        return reg;
+    }
+
+    public void setReg(Integer reg) {
+        this.reg = reg;
     }
 
     public String getName() {
@@ -38,12 +48,12 @@ public class Student {
             return false;
 
         Student student = (Student) obj;
-        return Objects.equals(this.name, student.name);
+        return Objects.equals(this.reg, student.reg) && Objects.equals(this.name, student.name);
     }
 
     @Override
     public String toString() {
-        return "Student [name=" + name + "]";
+        return "Student [reg=" + reg + ", name=" + name + "]";
     }
 
 }
