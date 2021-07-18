@@ -18,7 +18,7 @@ public class Meeting {
     private int day;
     private int month;
 
-    @ManyToMany(mappedBy = "registeredMeetingsID")
+    @ManyToMany(mappedBy = "registeredMeetings")
     private List<Student> registereds;
 
     public Meeting() {

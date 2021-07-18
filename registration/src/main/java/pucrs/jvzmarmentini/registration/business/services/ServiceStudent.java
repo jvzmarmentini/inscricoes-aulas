@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
-import pucrs.jvzmarmentini.registration.business.entities.MeetingID;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 import pucrs.jvzmarmentini.registration.business.repositories.IStudentRepository;
 
@@ -30,8 +29,7 @@ public class ServiceStudent {
     }
 
     public Student allStudents(String name) {
-        // TODO
-        return null;
+        return studRepo.allStudents(name);
     }
 
     public Student newStudent(Student newStudent) {

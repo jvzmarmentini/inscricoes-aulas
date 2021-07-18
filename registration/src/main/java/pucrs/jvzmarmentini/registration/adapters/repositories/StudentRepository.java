@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
-import pucrs.jvzmarmentini.registration.business.entities.MeetingID;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 import pucrs.jvzmarmentini.registration.business.repositories.IStudentRepository;
 
@@ -27,13 +26,12 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public Student allStudents(Integer reg) {
-        return studCRUD.getById(reg);
+        return studCRUD.findAll().stream().filter(student -> student.getReg().equals(reg)).findFirst().orElseThrow();
     }
 
     @Override
     public Student allStudents(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        return studCRUD.findAll().stream().filter(student -> student.getName().equals(name)).findFirst().orElseThrow();
     }
 
     @Override

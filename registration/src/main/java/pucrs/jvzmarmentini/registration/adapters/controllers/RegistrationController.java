@@ -23,7 +23,6 @@ import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberMeeti
 import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberStudentUC;
 import pucrs.jvzmarmentini.registration.application.usecase.RegisterSubscriberUC;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
-import pucrs.jvzmarmentini.registration.business.entities.MeetingID;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 
 @RestController
@@ -70,7 +69,7 @@ public class RegistrationController {
         return queryStdu.run(reg);
     }
 
-    @GetMapping("/students/{name}")
+    @GetMapping("/students/name/{name}")
     @CrossOrigin(origins = "*")
     public Student oneByName(@PathVariable String name) {
         return queryStdu.run(name);
