@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+// import javax.persistence.JoinColumn;
+// import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity(name = "Student")
@@ -16,8 +16,9 @@ public class Student {
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "meeting_registered", joinColumns = @JoinColumn(name = "student_reg"), inverseJoinColumns = @JoinColumn(name = "meeting_id"))
-    List<Meeting> registeredMeetings;
+    // @JoinTable(name = "meeting_registered", joinColumns = @JoinColumn(name =
+    // "student_reg"), inverseJoinColumns = @JoinColumn(name = "meeting_id"))
+    private List<Meeting> registeredMeetings;
 
     public Student() {
     }
@@ -25,6 +26,12 @@ public class Student {
     public Student(Integer reg, String name) {
         this.reg = reg;
         this.name = name;
+    }
+
+    public Student(Integer reg, String name, List<Meeting> registeredMeetings) {
+        this.reg = reg;
+        this.name = name;
+        this.registeredMeetings = registeredMeetings;
     }
 
     public Integer getReg() {
@@ -41,6 +48,18 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Meeting> getRegisteredMeetings() {
+        return registeredMeetings;
+    }
+
+    public void setRegisteredMeetings(List<Meeting> registeredMeetings) {
+        this.registeredMeetings = registeredMeetings;
+    }
+
+    public void addRegisteredMeeting(Meeting meet) {
+        registeredMeetings.add(meet);
     }
 
     @Override
@@ -61,7 +80,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student [reg=" + reg + ", name=" + name + "]";
+        return "Student [name=" + name + ", reg=" + reg + ", registeredMeetings=" + registeredMeetings + "]";
     }
 
 }

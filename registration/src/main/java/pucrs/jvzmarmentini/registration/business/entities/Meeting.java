@@ -18,8 +18,8 @@ public class Meeting {
     private int day;
     private int month;
 
-    @ManyToMany(mappedBy = "registeredMeetings")
-    List<Student> registereds;
+    @ManyToMany(mappedBy = "registeredMeetingsID")
+    private List<Student> registereds;
 
     public Meeting() {
     }
@@ -29,6 +29,14 @@ public class Meeting {
         this.classNum = classNum;
         this.day = day;
         this.month = month;
+    }
+
+    public Meeting(String codcred, Integer classNum, int day, int month, List<Student> registereds) {
+        this.codcred = codcred;
+        this.classNum = classNum;
+        this.day = day;
+        this.month = month;
+        this.registereds = registereds;
     }
 
     public String getCodcred() {
@@ -63,6 +71,19 @@ public class Meeting {
         this.month = month;
     }
 
+    public List<Student> getRegistereds() {
+        return registereds;
+    }
+
+    public void setRegistereds(List<Student> registereds) {
+        this.registereds = registereds;
+    }
+
+    public Meeting addRegistered(Student student) {
+        registereds.add(student);
+        return this;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(this.codcred, this.classNum, this.day, this.month);
@@ -82,7 +103,8 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return "Meeting [classNum=" + classNum + ", codcred=" + codcred + ", day=" + day + ", month=" + month + "]";
+        return "Meeting [classNum=" + classNum + ", codcred=" + codcred + ", day=" + day + ", month=" + month
+                + ", registereds=" + registereds + "]";
     }
 
 }

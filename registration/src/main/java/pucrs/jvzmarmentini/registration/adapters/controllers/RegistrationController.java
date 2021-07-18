@@ -19,7 +19,11 @@ import pucrs.jvzmarmentini.registration.application.usecase.UpdateStudentUC;
 import pucrs.jvzmarmentini.registration.application.usecase.DeleteStudentUC;
 import pucrs.jvzmarmentini.registration.application.usecase.QueryMeetingUC;
 import pucrs.jvzmarmentini.registration.application.usecase.RegisterMeetingUC;
+import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberMeetingUC;
+import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberStudentUC;
+import pucrs.jvzmarmentini.registration.application.usecase.RegisterSubscriberUC;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
+import pucrs.jvzmarmentini.registration.business.entities.MeetingID;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 
 @RestController
@@ -32,16 +36,24 @@ public class RegistrationController {
     private final DeleteStudentUC delStdu;
     private final QueryMeetingUC queryMeet;
     private final RegisterMeetingUC regMeet;
+    private final QuerySubscriberMeetingUC querySubsMeet;
+    private final QuerySubscriberStudentUC querySubsStud;
+    private final RegisterSubscriberUC regSubs;
 
     @Autowired
     public RegistrationController(QueryStudentUC queryStdu, RegisterStudentUC regStdu, UpdateStudentUC updStdu,
-            DeleteStudentUC delStdu, QueryMeetingUC queryMeet, RegisterMeetingUC regMeet) {
+            DeleteStudentUC delStdu, QueryMeetingUC queryMeet, RegisterMeetingUC regMeet,
+            QuerySubscriberMeetingUC querySubsMeet, QuerySubscriberStudentUC querySubsStud,
+            RegisterSubscriberUC regSubs) {
         this.queryStdu = queryStdu;
         this.regStdu = regStdu;
         this.updStdu = updStdu;
         this.delStdu = delStdu;
         this.queryMeet = queryMeet;
         this.regMeet = regMeet;
+        this.querySubsMeet = querySubsMeet;
+        this.querySubsStud = querySubsStud;
+        this.regSubs = regSubs;
     }
 
     // Students end points
@@ -98,4 +110,23 @@ public class RegistrationController {
 
     // Subscribers end points
 
+    @GetMapping("/meetings/{codcred}/{classNum}/students")
+    @CrossOrigin(origins = "*")
+    public List<Student> studentsMeeting(@PathVariable("codcred") String codcred,
+            @PathVariable("classNum") Integer classNum) {
+        return querySubsMeet.run(codcred, classNum);
+    }
+
+    @GetMapping("/students/{reg}/meetings")
+    @CrossOrigin(origins = "*")
+    public List<Meeting> meetingsStudent(@PathVariable Integer reg) {
+        return querySubsStud.run(reg);
+    }
+
+    @PutMapping("/meetings/{codcred}/{classNum}/students/{reg}")
+    @CrossOrigin(origins = "*")
+    public Meeting subscriber(@PathVariable("codcred") String codcred, @PathVariable("classNum") Integer classNum,
+            @PathVariable("reg") Integer reg) {
+        return regSubs.run(codcred, classNum, reg);
+    }
 }

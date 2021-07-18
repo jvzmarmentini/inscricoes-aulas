@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.repositories.IMeetingRepository;
 
+import pucrs.jvzmarmentini.registration.business.entities.Student;
+
 @Service
 public class ServiceMeeting {
 
@@ -24,5 +26,17 @@ public class ServiceMeeting {
 
     public List<Meeting> allMeetings() {
         return meetRepo.allMeetings();
+    }
+
+    public Meeting allMeetings(String codcred, Integer classNum) {
+        return meetRepo.allMeetings(codcred, classNum);
+    }
+
+    public List<Student> getStudents(String codcred, Integer classNum) {
+        return meetRepo.getStudents(codcred, classNum);
+    }
+
+    public Meeting subscribeStudent(String codcred, Integer classNum, Student stud) {
+        return meetRepo.subscribeStudent(codcred, classNum, stud);
     }
 }

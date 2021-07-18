@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import pucrs.jvzmarmentini.registration.business.entities.Meeting;
+import pucrs.jvzmarmentini.registration.business.entities.MeetingID;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 import pucrs.jvzmarmentini.registration.business.repositories.IStudentRepository;
 
@@ -59,6 +61,17 @@ public class StudentRepository implements IStudentRepository {
         } catch (IllegalArgumentException e) {
             return false;
         }
+    }
+
+    @Override
+    public List<Meeting> getMeetings(Integer reg) {
+        return studCRUD.findById(reg).get().getRegisteredMeetings();
+    }
+
+    @Override
+    public void subscribeMeeting(Meeting meet, Integer reg) {
+        studCRUD.findById(reg).get().addRegisteredMeeting(meet);
+        ;
     }
 
 }
