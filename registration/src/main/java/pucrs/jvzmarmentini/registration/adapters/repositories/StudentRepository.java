@@ -69,7 +69,6 @@ public class StudentRepository implements IStudentRepository {
     @Override
     public void subscribeMeeting(Meeting meet, Integer reg) {
         studCRUD.findById(reg).get().addRegisteredMeeting(meet);
-        ;
     }
 
 }

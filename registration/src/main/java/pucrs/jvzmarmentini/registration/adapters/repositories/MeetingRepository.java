@@ -45,7 +45,17 @@ public class MeetingRepository implements IMeetingRepository {
     @Override
     public Meeting subscribeStudent(String codcred, Integer classNum, Student stud) {
         MeetingID id = new MeetingID(codcred, classNum);
+        if (meetCRUD.findById(id).get().getRegistereds().size() < 10)
+            return meetCRUD.findById(id).get();
         return meetCRUD.findById(id).get().addRegistered(stud);
+
+        // Meeting meet = meetCRUD.findById(id).get();
+        // try {
+        // return meet.addRegistered(stud);
+        // } catch (Exception e) {
+        // System.err.println(e);
+        // return meet;
+        // }
     }
 
 }

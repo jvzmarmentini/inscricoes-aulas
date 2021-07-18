@@ -80,6 +80,9 @@ public class Meeting {
     }
 
     public Meeting addRegistered(Student student) {
+        // if (registereds.size() >= 10) {
+        // throw new Exception("Limite de alunos!");
+        // }
         registereds.add(student);
         return this;
     }
