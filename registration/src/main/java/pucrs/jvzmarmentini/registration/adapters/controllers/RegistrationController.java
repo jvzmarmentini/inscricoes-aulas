@@ -17,11 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 import pucrs.jvzmarmentini.registration.application.usecase.QueryStudentUC;
 import pucrs.jvzmarmentini.registration.application.usecase.RegisterStudentUC;
 import pucrs.jvzmarmentini.registration.application.usecase.UpdateStudentUC;
+import pucrs.jvzmarmentini.registration.application.dto.SubscribersNamesDTO;
+import pucrs.jvzmarmentini.registration.application.dto.SubscribersTotalDTO;
 import pucrs.jvzmarmentini.registration.application.usecase.DeleteStudentUC;
 import pucrs.jvzmarmentini.registration.application.usecase.QueryMeetingUC;
 import pucrs.jvzmarmentini.registration.application.usecase.RegisterMeetingUC;
 import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberMeetingUC;
+import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberName;
 import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberStudentUC;
+import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberTotal;
 import pucrs.jvzmarmentini.registration.application.usecase.RegisterSubscriberUC;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
@@ -39,12 +43,14 @@ public class RegistrationController {
     private final QuerySubscriberMeetingUC querySubsMeet;
     private final QuerySubscriberStudentUC querySubsStud;
     private final RegisterSubscriberUC regSubs;
+    private final QuerySubscriberName queryName;
+    private final QuerySubscriberTotal queryTotal;
 
     @Autowired
     public RegistrationController(QueryStudentUC queryStdu, RegisterStudentUC regStdu, UpdateStudentUC updStdu,
             DeleteStudentUC delStdu, QueryMeetingUC queryMeet, RegisterMeetingUC regMeet,
             QuerySubscriberMeetingUC querySubsMeet, QuerySubscriberStudentUC querySubsStud,
-            RegisterSubscriberUC regSubs) {
+            RegisterSubscriberUC regSubs, QuerySubscriberName queryName, QuerySubscriberTotal queryTotal) {
         this.queryStdu = queryStdu;
         this.regStdu = regStdu;
         this.updStdu = updStdu;
@@ -54,6 +60,8 @@ public class RegistrationController {
         this.querySubsMeet = querySubsMeet;
         this.querySubsStud = querySubsStud;
         this.regSubs = regSubs;
+        this.queryName = queryName;
+        this.queryTotal = queryTotal;
     }
 
     // Students end points
@@ -135,5 +143,19 @@ public class RegistrationController {
     public Student subscriber(@PathVariable("reg") Integer reg, @PathVariable("codcred") String codcred,
             @PathVariable("classNum") Integer classNum) {
         return regSubs.run(reg, codcred, classNum);
+    }
+
+    @GetMapping("/subscribers/names/{codcred}/{classNum}")
+    @CrossOrigin(origins = "*")
+    public Set<SubscribersNamesDTO> subscribersNames(@PathVariable("codcred") String codcred,
+            @PathVariable("classNum") Integer classNum) {
+        return queryName.run(codcred, classNum);
+    }
+
+    @GetMapping("/subscribers/total/{codcred}/{classNum}")
+    @CrossOrigin(origins = "*")
+    public SubscribersTotalDTO subscribersTotal(@PathVariable("codcred") String codcred,
+            @PathVariable("classNum") Integer classNum) {
+        return queryTotal.run(codcred, classNum);
     }
 }
