@@ -18,5 +18,5 @@ public interface IMeetingRepository {
 
     Set<Student> getStudents(String codcred, Integer classNum);
 
-    void subscribeStudent(String codcred, Integer classNum, Student stud);
+    Meeting subscribeStudent(String codcred, Integer classNum, Student stud);
 }

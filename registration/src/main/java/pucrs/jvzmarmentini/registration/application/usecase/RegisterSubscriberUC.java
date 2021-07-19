@@ -20,11 +20,11 @@ public class RegisterSubscriberUC {
         this.servMeet = servMeet;
     }
 
-    public void run(String codcred, Integer classNum, Integer reg) {
-        servMeet.subscribeStudent(codcred, classNum, servStud.allStudents(reg));
+    public Meeting run(String codcred, Integer classNum, Integer reg) {
+        return servMeet.subscribeStudent(codcred, classNum, servStud.allStudents(reg));
     }
 
-    public void run(Integer reg, String codcred, Integer classNum) {
-        servStud.subscribeMeeting(servMeet.allMeetings(codcred, classNum), reg);
+    public Student run(Integer reg, String codcred, Integer classNum) {
+        return servStud.subscribeMeeting(servMeet.allMeetings(codcred, classNum), reg);
     }
 }

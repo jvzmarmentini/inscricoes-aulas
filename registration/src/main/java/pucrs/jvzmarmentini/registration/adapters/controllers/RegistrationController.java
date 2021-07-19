@@ -125,15 +125,15 @@ public class RegistrationController {
 
     @PutMapping("/meetings/{codcred}/{classNum}/students/{reg}")
     @CrossOrigin(origins = "*")
-    public void subscriber(@PathVariable("codcred") String codcred, @PathVariable("classNum") Integer classNum,
+    public Meeting subscriber(@PathVariable("codcred") String codcred, @PathVariable("classNum") Integer classNum,
             @PathVariable("reg") Integer reg) {
-        regSubs.run(codcred, classNum, reg);
+        return regSubs.run(codcred, classNum, reg);
     }
 
     @PutMapping("/students/{reg}/meetings/{codcred}/{classNum}")
     @CrossOrigin(origins = "*")
-    public void subscriber(@PathVariable("reg") Integer reg, @PathVariable("codcred") String codcred,
+    public Student subscriber(@PathVariable("reg") Integer reg, @PathVariable("codcred") String codcred,
             @PathVariable("classNum") Integer classNum) {
-        regSubs.run(reg, codcred, classNum);
+        return regSubs.run(reg, codcred, classNum);
     }
 }

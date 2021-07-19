@@ -37,7 +37,7 @@ public class ServiceMeeting {
         return meetRepo.getStudents(codcred, classNum);
     }
 
-    public void subscribeStudent(String codcred, Integer classNum, Student stud) {
-        meetRepo.subscribeStudent(codcred, classNum, stud);
+    public Meeting subscribeStudent(String codcred, Integer classNum, Student stud) {
+        return meetRepo.subscribeStudent(codcred, classNum, stud);
     }
 }

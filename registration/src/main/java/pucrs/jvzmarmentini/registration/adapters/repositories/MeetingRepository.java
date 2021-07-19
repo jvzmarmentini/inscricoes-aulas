@@ -44,11 +44,11 @@ public class MeetingRepository implements IMeetingRepository {
     }
 
     @Override
-    public void subscribeStudent(String codcred, Integer classNum, Student stud) {
+    public Meeting subscribeStudent(String codcred, Integer classNum, Student stud) {
         MeetingID id = new MeetingID(codcred, classNum);
         if (meetCRUD.findById(id).get().getRegistereds().size() < 10)
             meetCRUD.findById(id).get();
-        meetCRUD.findById(id).get().addRegistered(stud);
+        return meetCRUD.save(meetCRUD.findById(id).get().addRegistered(stud));
 
         // Meeting meet = meetCRUD.findById(id).get();
         // try {

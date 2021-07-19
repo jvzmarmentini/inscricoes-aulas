@@ -49,8 +49,8 @@ public class ServiceStudent {
         return studRepo.getMeetings(reg);
     }
 
-    public void subscribeMeeting(Meeting meet, Integer reg) {
-        studRepo.subscribeMeeting(meet, reg);
+    public Student subscribeMeeting(Meeting meet, Integer reg) {
+        return studRepo.subscribeMeeting(meet, reg);
     }
 
 }

@@ -71,13 +71,13 @@ public class Meeting {
         this.registereds = registereds;
     }
 
-    public void addRegistered(Student student) {
+    public Meeting addRegistered(Student student) {
         // if (registereds.size() >= 10) {
         // throw new Exception("Limite de alunos!");
         // }
         if (this.registereds.add(student))
             student.addRegisteredMeeting(this);
-        // return this;
+        return this;
     }
 
     public Meeting removeRegistered(Student student) {

@@ -24,5 +24,5 @@ public interface IStudentRepository {
 
     Set<Meeting> getMeetings(Integer reg);
 
-    void subscribeMeeting(Meeting meet, Integer reg);
+    Student subscribeMeeting(Meeting meet, Integer reg);
 }

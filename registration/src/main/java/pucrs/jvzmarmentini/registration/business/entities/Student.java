@@ -4,27 +4,24 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-// import javax.persistence.JoinColumn;
-// import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "Student")
-@Table(name = "Student")
 public class Student {
 
     @Id
-    @Column(name = "reg")
     private Integer reg;
     private String name;
 
+    @JsonIgnore
     @ManyToMany
-    @JoinTable(name = "registered_meetings", joinColumns = @JoinColumn(name = "reg"), inverseJoinColumns = {
+    @JoinTable(name = "registered_meetings", joinColumns = @JoinColumn(name = "student_reg"), inverseJoinColumns = {
             @JoinColumn(name = "codcred", referencedColumnName = "codcred"),
             @JoinColumn(name = "classNum", referencedColumnName = "classNum") })
 
@@ -62,10 +59,10 @@ public class Student {
         this.registeredMeetings = registeredMeetings;
     }
 
-    public void addRegisteredMeeting(Meeting meet) {
+    public Student addRegisteredMeeting(Meeting meet) {
         if (this.registeredMeetings.add(meet))
             meet.addRegistered(this);
-        // return this;
+        return this;
     }
 
     public Student removeRegisteredMeeting(Meeting meet) {
