@@ -1,58 +1,50 @@
 package pucrs.jvzmarmentini.registration.business.entities;
 
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-import java.util.List;
+import java.util.HashSet;
 
 @Entity(name = "Meeting")
-@IdClass(MeetingID.class)
+@Table(name = "meeting")
 public class Meeting {
 
-    private @Id String codcred;
-    private @Id Integer classNum;
+    @EmbeddedId
+    private MeetingID id;
     private int day;
     private int month;
 
     @ManyToMany(mappedBy = "registeredMeetings")
-    private List<Student> registereds;
+    private Set<Student> registereds = new HashSet<Student>();
 
     public Meeting() {
     }
 
     public Meeting(String codcred, Integer classNum, int day, int month) {
-        this.codcred = codcred;
-        this.classNum = classNum;
+        this.id = new MeetingID(codcred, classNum);
         this.day = day;
         this.month = month;
-    }
-
-    public Meeting(String codcred, Integer classNum, int day, int month, List<Student> registereds) {
-        this.codcred = codcred;
-        this.classNum = classNum;
-        this.day = day;
-        this.month = month;
-        this.registereds = registereds;
     }
 
     public String getCodcred() {
-        return codcred;
+        return id.getCodcred();
     }
 
     public void setCodcred(String codcred) {
-        this.codcred = codcred;
+        this.id.setCodcred(codcred);
     }
 
     public Integer getClassNum() {
-        return classNum;
+        return id.getClassNum();
     }
 
     public void setClassNum(Integer classNum) {
-        this.classNum = classNum;
+        this.id.setClassNum(classNum);
     }
 
     public int getDay() {
@@ -71,25 +63,35 @@ public class Meeting {
         this.month = month;
     }
 
-    public List<Student> getRegistereds() {
+    public Set<Student> getRegistereds() {
         return registereds;
     }
 
-    public void setRegistereds(List<Student> registereds) {
+    public void setRegistereds(Set<Student> registereds) {
         this.registereds = registereds;
     }
 
-    public Meeting addRegistered(Student student) {
+    public void addRegistered(Student student) {
         // if (registereds.size() >= 10) {
         // throw new Exception("Limite de alunos!");
         // }
-        registereds.add(student);
+        if (this.registereds.add(student))
+            student.addRegisteredMeeting(this);
+        // return this;
+    }
+
+    public Meeting removeRegistered(Student student) {
+        // if (registereds.size() >= 10) {
+        // throw new Exception("Limite de alunos!");
+        // }
+        this.registereds.remove(student);
+        student.removeRegisteredMeeting(this);
         return this;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.codcred, this.classNum, this.day, this.month);
+        return Objects.hash(this.id, this.day, this.month);
     }
 
     @Override
@@ -100,14 +102,14 @@ public class Meeting {
             return false;
 
         Meeting meeting = (Meeting) obj;
-        return Objects.equals(this.codcred, meeting.codcred) && Objects.equals(this.classNum, meeting.classNum)
-                && Objects.equals(this.day, meeting.day) && Objects.equals(this.month, meeting.month);
+        return Objects.equals(this.id, meeting.id) && Objects.equals(this.day, meeting.day)
+                && Objects.equals(this.month, meeting.month);
     }
 
     @Override
     public String toString() {
-        return "Meeting [classNum=" + classNum + ", codcred=" + codcred + ", day=" + day + ", month=" + month
-                + ", registereds=" + registereds + "]";
+        return "Meeting [classNum=" + id.getClassNum() + ", codcred=" + id.getCodcred() + ", day=" + day + ", month="
+                + month + ", registereds=" + registereds + "]";
     }
 
 }

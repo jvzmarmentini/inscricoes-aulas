@@ -1,6 +1,7 @@
 package pucrs.jvzmarmentini.registration.adapters.repositories;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,17 +38,17 @@ public class MeetingRepository implements IMeetingRepository {
     }
 
     @Override
-    public List<Student> getStudents(String codcred, Integer classNum) {
+    public Set<Student> getStudents(String codcred, Integer classNum) {
         MeetingID id = new MeetingID(codcred, classNum);
         return meetCRUD.findById(id).get().getRegistereds();
     }
 
     @Override
-    public Meeting subscribeStudent(String codcred, Integer classNum, Student stud) {
+    public void subscribeStudent(String codcred, Integer classNum, Student stud) {
         MeetingID id = new MeetingID(codcred, classNum);
         if (meetCRUD.findById(id).get().getRegistereds().size() < 10)
-            return meetCRUD.findById(id).get();
-        return meetCRUD.findById(id).get().addRegistered(stud);
+            meetCRUD.findById(id).get();
+        meetCRUD.findById(id).get().addRegistered(stud);
 
         // Meeting meet = meetCRUD.findById(id).get();
         // try {

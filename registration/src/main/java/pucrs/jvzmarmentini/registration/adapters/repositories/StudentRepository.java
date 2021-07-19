@@ -1,6 +1,7 @@
 package pucrs.jvzmarmentini.registration.adapters.repositories;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -62,7 +63,7 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
-    public List<Meeting> getMeetings(Integer reg) {
+    public Set<Meeting> getMeetings(Integer reg) {
         return studCRUD.findById(reg).get().getRegisteredMeetings();
     }
 

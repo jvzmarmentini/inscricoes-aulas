@@ -1,6 +1,6 @@
 package pucrs.jvzmarmentini.registration.application.usecase;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class QuerySubscriberMeetingUC {
         this.servMeet = servMeet;
     }
 
-    public List<Student> run(String codcred, Integer classNum) {
+    public Set<Student> run(String codcred, Integer classNum) {
         return servMeet.getStudents(codcred, classNum);
     }
 

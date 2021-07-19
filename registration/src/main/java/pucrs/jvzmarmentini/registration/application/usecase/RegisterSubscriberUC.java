@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
+import pucrs.jvzmarmentini.registration.business.entities.Student;
 import pucrs.jvzmarmentini.registration.business.services.ServiceMeeting;
 import pucrs.jvzmarmentini.registration.business.services.ServiceStudent;
 
@@ -19,8 +20,11 @@ public class RegisterSubscriberUC {
         this.servMeet = servMeet;
     }
 
-    public Meeting run(String codcred, Integer classNum, Integer reg) {
+    public void run(String codcred, Integer classNum, Integer reg) {
+        servMeet.subscribeStudent(codcred, classNum, servStud.allStudents(reg));
+    }
+
+    public void run(Integer reg, String codcred, Integer classNum) {
         servStud.subscribeMeeting(servMeet.allMeetings(codcred, classNum), reg);
-        return servMeet.subscribeStudent(codcred, classNum, servStud.allStudents(reg));
     }
 }

@@ -1,24 +1,34 @@
 package pucrs.jvzmarmentini.registration.business.entities;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 // import javax.persistence.JoinColumn;
 // import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity(name = "Student")
+@Table(name = "Student")
 public class Student {
 
-    private @Id Integer reg;
+    @Id
+    @Column(name = "reg")
+    private Integer reg;
     private String name;
 
     @ManyToMany
-    // @JoinTable(name = "meeting_registered", joinColumns = @JoinColumn(name =
-    // "student_reg"), inverseJoinColumns = @JoinColumn(name = "meeting_id"))
-    private List<Meeting> registeredMeetings;
+    @JoinTable(name = "registered_meetings", joinColumns = @JoinColumn(name = "reg"), inverseJoinColumns = {
+            @JoinColumn(name = "codcred", referencedColumnName = "codcred"),
+            @JoinColumn(name = "classNum", referencedColumnName = "classNum") })
+
+    private Set<Meeting> registeredMeetings = new HashSet<Meeting>();
 
     public Student() {
     }
@@ -26,12 +36,6 @@ public class Student {
     public Student(Integer reg, String name) {
         this.reg = reg;
         this.name = name;
-    }
-
-    public Student(Integer reg, String name, List<Meeting> registeredMeetings) {
-        this.reg = reg;
-        this.name = name;
-        this.registeredMeetings = registeredMeetings;
     }
 
     public Integer getReg() {
@@ -50,16 +54,24 @@ public class Student {
         this.name = name;
     }
 
-    public List<Meeting> getRegisteredMeetings() {
+    public Set<Meeting> getRegisteredMeetings() {
         return registeredMeetings;
     }
 
-    public void setRegisteredMeetings(List<Meeting> registeredMeetings) {
+    public void setRegisteredMeetings(Set<Meeting> registeredMeetings) {
         this.registeredMeetings = registeredMeetings;
     }
 
     public void addRegisteredMeeting(Meeting meet) {
-        registeredMeetings.add(meet);
+        if (this.registeredMeetings.add(meet))
+            meet.addRegistered(this);
+        // return this;
+    }
+
+    public Student removeRegisteredMeeting(Meeting meet) {
+        this.registeredMeetings.remove(meet);
+        meet.removeRegistered(this);
+        return this;
     }
 
     @Override

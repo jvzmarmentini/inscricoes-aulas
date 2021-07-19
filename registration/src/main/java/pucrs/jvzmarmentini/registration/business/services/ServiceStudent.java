@@ -1,5 +1,6 @@
 package pucrs.jvzmarmentini.registration.business.services;
 
+import java.util.Set;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class ServiceStudent {
         return deleteStudent(reg);
     }
 
-    public List<Meeting> getMeetings(Integer reg) {
+    public Set<Meeting> getMeetings(Integer reg) {
         return studRepo.getMeetings(reg);
     }
 

@@ -1,5 +1,6 @@
 package pucrs.jvzmarmentini.registration.business.services;
 
+import java.util.Set;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,11 @@ public class ServiceMeeting {
         return meetRepo.allMeetings(codcred, classNum);
     }
 
-    public List<Student> getStudents(String codcred, Integer classNum) {
+    public Set<Student> getStudents(String codcred, Integer classNum) {
         return meetRepo.getStudents(codcred, classNum);
     }
 
-    public Meeting subscribeStudent(String codcred, Integer classNum, Student stud) {
-        return meetRepo.subscribeStudent(codcred, classNum, stud);
+    public void subscribeStudent(String codcred, Integer classNum, Student stud) {
+        meetRepo.subscribeStudent(codcred, classNum, stud);
     }
 }

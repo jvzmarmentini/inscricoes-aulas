@@ -1,6 +1,7 @@
 package pucrs.jvzmarmentini.registration.business.repositories;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ public interface IStudentRepository {
 
     boolean deleteStudent(Integer reg);
 
-    List<Meeting> getMeetings(Integer reg);
+    Set<Meeting> getMeetings(Integer reg);
 
     void subscribeMeeting(Meeting meet, Integer reg);
 }

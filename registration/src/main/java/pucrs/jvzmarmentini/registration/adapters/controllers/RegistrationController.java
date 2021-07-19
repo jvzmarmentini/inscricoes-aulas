@@ -1,6 +1,7 @@
 package pucrs.jvzmarmentini.registration.adapters.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -111,21 +112,28 @@ public class RegistrationController {
 
     @GetMapping("/meetings/{codcred}/{classNum}/students")
     @CrossOrigin(origins = "*")
-    public List<Student> studentsMeeting(@PathVariable("codcred") String codcred,
+    public Set<Student> studentsMeeting(@PathVariable("codcred") String codcred,
             @PathVariable("classNum") Integer classNum) {
         return querySubsMeet.run(codcred, classNum);
     }
 
     @GetMapping("/students/{reg}/meetings")
     @CrossOrigin(origins = "*")
-    public List<Meeting> meetingsStudent(@PathVariable Integer reg) {
+    public Set<Meeting> meetingsStudent(@PathVariable Integer reg) {
         return querySubsStud.run(reg);
     }
 
     @PutMapping("/meetings/{codcred}/{classNum}/students/{reg}")
     @CrossOrigin(origins = "*")
-    public Meeting subscriber(@PathVariable("codcred") String codcred, @PathVariable("classNum") Integer classNum,
+    public void subscriber(@PathVariable("codcred") String codcred, @PathVariable("classNum") Integer classNum,
             @PathVariable("reg") Integer reg) {
-        return regSubs.run(codcred, classNum, reg);
+        regSubs.run(codcred, classNum, reg);
+    }
+
+    @PutMapping("/students/{reg}/meetings/{codcred}/{classNum}")
+    @CrossOrigin(origins = "*")
+    public void subscriber(@PathVariable("reg") Integer reg, @PathVariable("codcred") String codcred,
+            @PathVariable("classNum") Integer classNum) {
+        regSubs.run(reg, codcred, classNum);
     }
 }

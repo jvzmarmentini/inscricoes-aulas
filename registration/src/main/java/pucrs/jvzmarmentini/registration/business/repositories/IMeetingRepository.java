@@ -1,6 +1,7 @@
 package pucrs.jvzmarmentini.registration.business.repositories;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ public interface IMeetingRepository {
 
     Meeting allMeetings(String codcred, Integer classNum);
 
-    List<Student> getStudents(String codcred, Integer classNum);
+    Set<Student> getStudents(String codcred, Integer classNum);
 
-    Meeting subscribeStudent(String codcred, Integer classNum, Student stud);
+    void subscribeStudent(String codcred, Integer classNum, Student stud);
 }
