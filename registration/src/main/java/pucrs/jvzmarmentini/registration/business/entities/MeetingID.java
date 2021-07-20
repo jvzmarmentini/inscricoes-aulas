@@ -3,16 +3,9 @@ package pucrs.jvzmarmentini.registration.business.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class MeetingID implements Serializable {
 
-    @Column(name = "codcred")
     private String codcred;
-
-    @Column(name = "classNum")
     private Integer classNum;
 
     public MeetingID() {

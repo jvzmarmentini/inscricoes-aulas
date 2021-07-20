@@ -6,8 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+// import javax.persistence.JoinColumn;
+// import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,9 +21,10 @@ public class Student {
 
     @JsonIgnore
     @ManyToMany
-    @JoinTable(name = "registered_meetings", joinColumns = @JoinColumn(name = "student_reg"), inverseJoinColumns = {
-            @JoinColumn(name = "codcred", referencedColumnName = "codcred"),
-            @JoinColumn(name = "classNum", referencedColumnName = "classNum") })
+    // @JoinTable(name = "registered_meetings", joinColumns = @JoinColumn(name =
+    // "student_reg"), inverseJoinColumns = {
+    // @JoinColumn(name = "codcred", referencedColumnName = "codcred"),
+    // @JoinColumn(name = "classNum", referencedColumnName = "classNum") })
 
     private Set<Meeting> registeredMeetings = new HashSet<Meeting>();
 
@@ -59,15 +60,15 @@ public class Student {
         this.registeredMeetings = registeredMeetings;
     }
 
-    public Student addRegisteredMeeting(Meeting meet) {
+    public Student addRegisteredMeeting(Meeting meet) throws Exception {
         if (this.registeredMeetings.add(meet))
             meet.addRegistered(this);
         return this;
     }
 
-    public Student removeRegisteredMeeting(Meeting meet) {
-        this.registeredMeetings.remove(meet);
-        meet.removeRegistered(this);
+    public Student removeRegisteredMeeting(Meeting meet) throws Exception {
+        if (this.registeredMeetings.remove(meet))
+            meet.removeRegistered(this);
         return this;
     }
 

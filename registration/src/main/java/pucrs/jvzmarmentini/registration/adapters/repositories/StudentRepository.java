@@ -69,7 +69,13 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public Student subscribeMeeting(Meeting meet, Integer reg) {
-        return studCRUD.save(studCRUD.findById(reg).get().addRegisteredMeeting(meet));
+        Student student = studCRUD.findById(reg).get();
+        try {
+            return studCRUD.save(student.addRegisteredMeeting(meet));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return student;
+        }
     }
 
 }

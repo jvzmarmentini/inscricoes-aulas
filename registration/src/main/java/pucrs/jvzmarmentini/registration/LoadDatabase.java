@@ -19,16 +19,36 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initStudentDatabase(IStudentCRUD studCRUD) {
         return args -> {
-            log.info("Preloading " + studCRUD.save(new Student(20100001, "Bilbo Baggins")));
-            log.info("Preloading " + studCRUD.save(new Student(20100002, "Frodo Baggins")));
+            log.info("Preloading " + studCRUD.save(new Student(1, "Yuga Aoyama")));
+            log.info("Preloading " + studCRUD.save(new Student(2, "Mina Ashido")));
+            log.info("Preloading " + studCRUD.save(new Student(3, "Tsuyu Asui")));
+            log.info("Preloading " + studCRUD.save(new Student(4, "Tenya Iida")));
+            log.info("Preloading " + studCRUD.save(new Student(5, "Ochaco Uraraka")));
+            log.info("Preloading " + studCRUD.save(new Student(6, "Mashirao Ojiro")));
+            log.info("Preloading " + studCRUD.save(new Student(7, "Denki Kaminari")));
+            log.info("Preloading " + studCRUD.save(new Student(8, "Eijiro Kirishima")));
+            log.info("Preloading " + studCRUD.save(new Student(9, "Koji Koda")));
+            log.info("Preloading " + studCRUD.save(new Student(10, "Rikido Sato")));
+            log.info("Preloading " + studCRUD.save(new Student(11, "Mezo Shoji")));
+            log.info("Preloading " + studCRUD.save(new Student(12, "Kyoka Jiro")));
+            log.info("Preloading " + studCRUD.save(new Student(13, "Hanta Sero")));
+            log.info("Preloading " + studCRUD.save(new Student(14, "Fumikage Tokoyami")));
+            log.info("Preloading " + studCRUD.save(new Student(15, "Shoto Todoroki")));
+            log.info("Preloading " + studCRUD.save(new Student(16, "Toru Hagakure")));
+            log.info("Preloading " + studCRUD.save(new Student(17, "Katsuki Bakugo")));
+            log.info("Preloading " + studCRUD.save(new Student(18, "Izuku Midoriya")));
+            log.info("Preloading " + studCRUD.save(new Student(19, "Minoru Mineta")));
+            log.info("Preloading " + studCRUD.save(new Student(20, "Momo Yaoyorozu")));
         };
     }
 
     @Bean
     CommandLineRunner initMeetingDatabase(IMeetingCRUD meetCRUD) {
         return args -> {
-            log.info("Preloading " + meetCRUD.save(new Meeting("98801-04", 30, 20, 8)));
-            log.info("Preloading " + meetCRUD.save(new Meeting("98H00-04", 30, 21, 8)));
+            log.info("Preloading " + meetCRUD.save(new Meeting("9A1", 1, 20, 8)));
+            log.info("Preloading " + meetCRUD.save(new Meeting("9A1", 2, 22, 8)));
+            log.info("Preloading " + meetCRUD.save(new Meeting("9B1", 1, 21, 8)));
+            log.info("Preloading " + meetCRUD.save(new Meeting("9B1", 2, 23, 8)));
         };
     }
 }
