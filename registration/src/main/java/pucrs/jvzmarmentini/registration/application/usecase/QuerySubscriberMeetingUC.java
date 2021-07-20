@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 import pucrs.jvzmarmentini.registration.business.services.ServiceMeeting;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @Component
 public class QuerySubscriberMeetingUC {
 

@@ -11,6 +11,12 @@ import pucrs.jvzmarmentini.registration.business.repositories.IMeetingRepository
 
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @Service
 public class ServiceMeeting {
 

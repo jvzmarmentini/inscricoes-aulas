@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.services.ServiceMeeting;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @Component
 public class RegisterMeetingUC {
 
@@ -18,10 +24,6 @@ public class RegisterMeetingUC {
 
     public Meeting run(Meeting newMeeting) {
         return servMeet.newMeeting(newMeeting);
-    }
-
-    public Meeting run(String codcred, Integer classNum, Integer reg) {
-        return null;
     }
 
 }

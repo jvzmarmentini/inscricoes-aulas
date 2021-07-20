@@ -8,6 +8,12 @@ import pucrs.jvzmarmentini.registration.business.entities.Student;
 import pucrs.jvzmarmentini.registration.business.services.ServiceMeeting;
 import pucrs.jvzmarmentini.registration.business.services.ServiceStudent;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @Component
 public class RegisterSubscriberUC {
 
@@ -26,5 +32,13 @@ public class RegisterSubscriberUC {
 
     public Student run(Integer reg, String codcred, Integer classNum) {
         return servStud.subscribeMeeting(servMeet.allMeetings(codcred, classNum), reg);
+    }
+
+    public Meeting run(String codcred, Integer classNum, String name) {
+        return servMeet.subscribeStudent(codcred, classNum, servStud.allStudents(name));
+    }
+
+    public Student run(String name, String codcred, Integer classNum) {
+        return servStud.subscribeMeeting(servMeet.allMeetings(codcred, classNum), servStud.allStudents(name).getReg());
     }
 }

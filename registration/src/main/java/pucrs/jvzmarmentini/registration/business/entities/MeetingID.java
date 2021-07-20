@@ -3,6 +3,12 @@ package pucrs.jvzmarmentini.registration.business.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 public class MeetingID implements Serializable {
 
     private String codcred;

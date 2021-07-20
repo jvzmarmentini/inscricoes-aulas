@@ -12,6 +12,12 @@ import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @Entity(name = "Student")
 public class Student {
 
@@ -70,6 +76,10 @@ public class Student {
         if (this.registeredMeetings.remove(meet))
             meet.removeRegistered(this);
         return this;
+    }
+
+    public boolean regValid() {
+        return this.reg != null;
     }
 
     @Override

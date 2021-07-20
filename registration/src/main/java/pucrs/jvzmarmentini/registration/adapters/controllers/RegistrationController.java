@@ -30,6 +30,12 @@ import pucrs.jvzmarmentini.registration.application.usecase.RegisterSubscriberUC
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @RestController
 @RequestMapping("/registration")
 public class RegistrationController {
@@ -78,9 +84,9 @@ public class RegistrationController {
         return queryStdu.run(reg);
     }
 
-    @GetMapping("/students/name/{name}")
+    @GetMapping("/students/name")
     @CrossOrigin(origins = "*")
-    public Student oneByName(@PathVariable String name) {
+    public Student oneByName(String name) {
         return queryStdu.run(name);
     }
 
@@ -143,6 +149,20 @@ public class RegistrationController {
     public Student subscriber(@PathVariable("reg") Integer reg, @PathVariable("codcred") String codcred,
             @PathVariable("classNum") Integer classNum) {
         return regSubs.run(reg, codcred, classNum);
+    }
+
+    @PutMapping("/meetings/{codcred}/{classNum}/students")
+    @CrossOrigin(origins = "*")
+    public Meeting subscriber(@PathVariable("codcred") String codcred, @PathVariable("classNum") Integer classNum,
+            String name) {
+        return regSubs.run(codcred, classNum, name);
+    }
+
+    @PutMapping("/students/name/{name}/meetings/{codcred}/{classNum}")
+    @CrossOrigin(origins = "*")
+    public Student subscriber(@PathVariable("name") String name, @PathVariable("codcred") String codcred,
+            @PathVariable("classNum") Integer classNum) {
+        return regSubs.run(name, codcred, classNum);
     }
 
     @GetMapping("/subscribers/names/{codcred}/{classNum}")

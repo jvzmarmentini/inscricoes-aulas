@@ -10,6 +10,12 @@ import javax.persistence.ManyToMany;
 
 import java.util.HashSet;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @Entity(name = "Meeting")
 @IdClass(MeetingID.class)
 public class Meeting {

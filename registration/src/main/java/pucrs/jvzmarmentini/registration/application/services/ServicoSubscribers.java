@@ -11,6 +11,12 @@ import pucrs.jvzmarmentini.registration.application.dto.SubscribersTotalDTO;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 import pucrs.jvzmarmentini.registration.business.repositories.IMeetingRepository;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @Component
 public class ServicoSubscribers {
     private IMeetingRepository meetRepo;

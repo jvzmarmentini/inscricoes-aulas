@@ -11,6 +11,12 @@ import pucrs.jvzmarmentini.registration.adapters.repositories.IStudentCRUD;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
 
+/**
+ * @author João Victor Zucco Marmentini
+ * @custom.matricula 20103144
+ * @custom.gitHubLink https://github.com/jvzmarmentini/inscricoes-aulas
+ */
+
 @Configuration
 public class LoadDatabase {
 
