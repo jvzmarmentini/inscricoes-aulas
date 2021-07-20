@@ -62,12 +62,14 @@ public class Student {
     }
 
     public Student addRegisteredMeeting(Meeting meet) throws Exception {
+        if (meet.getRegistereds().size() == 10)
+            throw new Exception("Limite de alunos!");
         if (this.registeredMeetings.add(meet))
             meet.addRegistered(this);
         return this;
     }
 
-    public Student removeRegisteredMeeting(Meeting meet) throws Exception {
+    public Student removeRegisteredMeeting(Meeting meet) {
         if (this.registeredMeetings.remove(meet))
             meet.removeRegistered(this);
         return this;

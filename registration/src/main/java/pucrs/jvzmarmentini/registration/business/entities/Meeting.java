@@ -79,16 +79,16 @@ public class Meeting {
     }
 
     public Meeting addRegistered(Student student) throws Exception {
-        if (registereds.size() > 10)
+        if (this.registereds.size() == 10)
             throw new Exception("Limite de alunos!");
         if (this.registereds.add(student))
             student.addRegisteredMeeting(this);
         return this;
     }
 
-    public Meeting removeRegistered(Student student) throws Exception {
+    public Meeting removeRegistered(Student student) {
         if (registereds.size() == 0)
-            throw new Exception("Nenhum Aluno Cadastrado!");
+            return this;
         if (this.registereds.remove(student))
             student.removeRegisteredMeeting(this);
         return this;
