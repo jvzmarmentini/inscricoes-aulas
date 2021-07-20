@@ -12,11 +12,11 @@ import pucrs.jvzmarmentini.registration.application.services.ServicoSubscribers;
  */
 
 @Component
-public class QuerySubscriberTotal {
+public class QuerySubscriberTotalUC {
 
     private ServicoSubscribers servSubs;
 
-    public QuerySubscriberTotal(ServicoSubscribers servSubs) {
+    public QuerySubscriberTotalUC(ServicoSubscribers servSubs) {
         this.servSubs = servSubs;
     }
 

@@ -27,11 +27,6 @@ public class Student {
 
     @JsonIgnore
     @ManyToMany
-    // @JoinTable(name = "registered_meetings", joinColumns = @JoinColumn(name =
-    // "student_reg"), inverseJoinColumns = {
-    // @JoinColumn(name = "codcred", referencedColumnName = "codcred"),
-    // @JoinColumn(name = "classNum", referencedColumnName = "classNum") })
-
     private Set<Meeting> registeredMeetings = new HashSet<Meeting>();
 
     public Student() {

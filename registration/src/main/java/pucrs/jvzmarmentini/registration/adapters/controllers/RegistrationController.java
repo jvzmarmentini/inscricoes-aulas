@@ -23,9 +23,9 @@ import pucrs.jvzmarmentini.registration.application.usecase.DeleteStudentUC;
 import pucrs.jvzmarmentini.registration.application.usecase.QueryMeetingUC;
 import pucrs.jvzmarmentini.registration.application.usecase.RegisterMeetingUC;
 import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberMeetingUC;
-import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberName;
+import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberNameUC;
 import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberStudentUC;
-import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberTotal;
+import pucrs.jvzmarmentini.registration.application.usecase.QuerySubscriberTotalUC;
 import pucrs.jvzmarmentini.registration.application.usecase.RegisterSubscriberUC;
 import pucrs.jvzmarmentini.registration.business.entities.Meeting;
 import pucrs.jvzmarmentini.registration.business.entities.Student;
@@ -49,14 +49,14 @@ public class RegistrationController {
     private final QuerySubscriberMeetingUC querySubsMeet;
     private final QuerySubscriberStudentUC querySubsStud;
     private final RegisterSubscriberUC regSubs;
-    private final QuerySubscriberName queryName;
-    private final QuerySubscriberTotal queryTotal;
+    private final QuerySubscriberNameUC queryName;
+    private final QuerySubscriberTotalUC queryTotal;
 
     @Autowired
     public RegistrationController(QueryStudentUC queryStdu, RegisterStudentUC regStdu, UpdateStudentUC updStdu,
             DeleteStudentUC delStdu, QueryMeetingUC queryMeet, RegisterMeetingUC regMeet,
             QuerySubscriberMeetingUC querySubsMeet, QuerySubscriberStudentUC querySubsStud,
-            RegisterSubscriberUC regSubs, QuerySubscriberName queryName, QuerySubscriberTotal queryTotal) {
+            RegisterSubscriberUC regSubs, QuerySubscriberNameUC queryName, QuerySubscriberTotalUC queryTotal) {
         this.queryStdu = queryStdu;
         this.regStdu = regStdu;
         this.updStdu = updStdu;
